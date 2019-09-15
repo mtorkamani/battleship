@@ -23,7 +23,7 @@ namespace Battleship.Engine
             Ships.Add(ship);
         }
 
-        public void Hit(int row, int col)
+        public CoordinateStatus Hit(int row, int col)
         {
             var coordinate = BattleGround.Locate(row, col);
             coordinate.Hit();
@@ -31,6 +31,7 @@ namespace Battleship.Engine
             {
                 OnOver();
             }
+            return coordinate.Status;
         }
 
         public bool IsOver()

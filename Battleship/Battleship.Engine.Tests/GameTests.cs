@@ -18,13 +18,20 @@ namespace Battleship.Engine.Tests
         {
             game.Setup();
             game.PlaceShip(factory.Create(4), 1, 0, Orientation.Horizontal);
+            var status = CoordinateStatus.Unknown;
 
             Assert.False(game.IsOver());
 
-            game.Hit(1, 0);
-            game.Hit(1, 1);
-            game.Hit(1, 2);
-            game.Hit(1, 3);
+            status = game.Hit(1, 0);
+            Assert.Equal(CoordinateStatus.Hit, status);
+            status = game.Hit(1, 1);
+            Assert.Equal(CoordinateStatus.Hit, status);
+            status = game.Hit(2, 3);
+            Assert.Equal(CoordinateStatus.Missed, status);
+            status = game.Hit(1, 2);
+            Assert.Equal(CoordinateStatus.Hit, status);
+            status = game.Hit(1, 3);
+            Assert.Equal(CoordinateStatus.Hit, status);
 
             Assert.True(game.IsOver());
         }
@@ -34,14 +41,20 @@ namespace Battleship.Engine.Tests
         {
             game.Setup();
             game.PlaceShip(factory.Create(5), 2, 2, Orientation.Vertical);
+            var status = CoordinateStatus.Unknown;
 
             Assert.False(game.IsOver());
 
-            game.Hit(2, 2);
-            game.Hit(3, 2);
-            game.Hit(4, 2);
-            game.Hit(5, 2);
-            game.Hit(6, 2);
+            status = game.Hit(2, 2);
+            Assert.Equal(CoordinateStatus.Hit, status);
+            status = game.Hit(3, 2);
+            Assert.Equal(CoordinateStatus.Hit, status);
+            status = game.Hit(4, 2);
+            Assert.Equal(CoordinateStatus.Hit, status);
+            status = game.Hit(5, 2);
+            Assert.Equal(CoordinateStatus.Hit, status);
+            status = game.Hit(6, 2);
+            Assert.Equal(CoordinateStatus.Hit, status);
 
             Assert.True(game.IsOver());
         }
@@ -51,12 +64,18 @@ namespace Battleship.Engine.Tests
         {
             game.Setup();
             game.PlaceShip(factory.Create(5), 4, 6, Orientation.Vertical);
+            var status = CoordinateStatus.Unknown;
 
             Assert.False(game.IsOver());
 
-            game.Hit(4, 6);
-            game.Hit(5, 6);
-            game.Hit(6, 6);
+            status = game.Hit(4, 6);
+            Assert.Equal(CoordinateStatus.Hit, status);
+            status = game.Hit(5, 6);
+            Assert.Equal(CoordinateStatus.Hit, status);
+            status = game.Hit(6, 6);
+            Assert.Equal(CoordinateStatus.Hit, status);
+            status = game.Hit(4, 4);
+            Assert.Equal(CoordinateStatus.Missed, status);
 
             Assert.False(game.IsOver());
         }
